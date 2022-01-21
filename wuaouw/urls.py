@@ -23,11 +23,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.vistaInicial, name='index'),
     
-    path('shop/', views.Shop.as_view(), name='shop'),
+    path('shop/', views.shop, name='shop'),
     path('future/', views.future, name='future'),
     path('vacancies/', views.vacancies, name='vacancies'),
     path('cart/', views.cart, name='cart'),
-
+    path('product/', views.product, name='product'),
+    path('search/', views.search, name='search'),
     #### ACCESO A RECURSOS
     path('imagenbase.json', views.imagenbase, name='index')
 

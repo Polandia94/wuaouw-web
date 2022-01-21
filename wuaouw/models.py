@@ -6,6 +6,7 @@ class Shop(models.Model):
     nombre = models.CharField(db_column='nombre', max_length=80)
     precio = models.IntegerField(db_column='precio')
     descripcion = models.CharField(db_column='descripcion', max_length=400)
+    categoria = models.CharField(db_column='categoria', max_length=60)
     
     class Meta:
         app_label  = 'wuaouw'
@@ -22,7 +23,7 @@ class Shop(models.Model):
 class ShopImagenes(models.Model):
     id_shop_imagenes = models.AutoField(db_column='id_shop_imagenes', primary_key=True)
     id_shop = models.ForeignKey( 'shop', models.DO_NOTHING, db_column='id_shop')
-    ruta = models.CharField(db_column='ruta', max_length=120)
+    ruta = models.CharField(db_column='ruta', max_length=200)
     prioridad = models.IntegerField(db_column='prioridad')
     
     class Meta:

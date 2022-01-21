@@ -1,0 +1,28 @@
+{% extends "root.html" %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/shop.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/product.css'%}">
+{% endblock %}
+{% block body%}
+
+<section class="product-details">
+    <div class="image-slider">
+        <div class="product-images">
+            {% for i in imagenes %}
+            <img src="{{i}}" alt="">
+            {% endfor %}
+        </div>
+    </div>
+        <div class="details">
+             <h2 class="product-brand">{{producto.categoria}}</h2>
+             <p class="product-short-des">{{producto.descripcion}}</p>
+             <span class="product-price">{{producto.precioDividido}} LUAs</span>          
+             <button class="btn cart-btn">add to cart</button>
+         </div>
+</section>
+
+
+<script src="{% static 'js/product.js'%}"></script>
+
+{% endblock %}

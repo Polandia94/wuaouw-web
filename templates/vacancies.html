@@ -1,17 +1,6 @@
-hola
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js" type="text/javascript"></script>
-<cont id='anim_container'></div>
+{% extends "root.html" %}
 
-<script>
-    var container = document.getElementById('anim_container');
-      // Set up our animation 
+{% block body %}
+<div>Vacancies</div>
+{% endblock %}
 
-      var animData = {
-          container: container,
-          renderer: 'svg',
-          autoplay: true,
-          loop: true,
-          path : 'imagenbase.json'
-      };
-      var anim = lottie.loadAnimation(animData);
-</script>

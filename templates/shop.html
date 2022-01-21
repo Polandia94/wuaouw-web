@@ -1,5 +1,42 @@
 {% extends "root.html" %}
-
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/shop.css'%}">
+{% endblock %}
 {% block body %}
-<div>tienda</div>
+<nav class="navbar">
+    <div class="nav">
+        <img src="img/dark-logo.png" class="brand-logo" alt="">
+        <div class="nav-items">
+            <div class="search">
+                {{error}}
+                <input type="text" id="boxSearch" value="{{busqueda}}" class="search-box" placeholder="search description, product">
+                <button class="search-btn" id="btnSearch">search</button>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<button class="pre-btn"><i class="fas fa-arrow-right"></i></button>
+<button class="nxt-btn"><i class="fas fa-arrow-right"></i></button>
+<div class="product-container">
+    {% for i in products %}
+    <div class="product-card">
+        <div class="product-image">
+            <a href="/product?id={{i.id_shop}}"> <img src="{{i.imagenCabecera}}" class="product-thumb" alt=""></a>
+            <button class="card-btn" id="btnComprar{{i.id_shop}}" data-id_shop={{i.id_shop}}>Agregar al Carrito</button>
+            <button class="card-btn-cancel" style="visibility: hidden;" id="btnEliminar{{i.id_shop}}" data-id_shop={{i.id_shop}}>Eliminar delCarrito</button>
+            <div class="cantidad-comprada" style="visibility:hidden;" id="cantidad-comprada-{{i.id_shop}}">1</div>
+        </div>
+        <div class="product-info">
+            <h2 class="product-brand">{{i.nombre}}</h2>
+            <p class="product-short-des">{{i.descripcion}}</p>
+            <p class="product-short-des">{{i.categoria}}</p>
+            <span class="price">{{i.precioDividido}} LUAs</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script src="{% static 'js/shop.js'%}"></script>
+
 {% endblock %}

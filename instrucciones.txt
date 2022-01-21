@@ -7,8 +7,9 @@ python3 manage.py runserver
 PARA PASAR A PRODUCCION:
 
 crear tablas en mariadb:
-create table shop(id_shop INTEGER AUTO_INCREMENT KEY, nombre VARCHARAcontestCTER(80), precio INT, descripcion VARCHARACTER(400));
-create table shop_imagenes(id_shop_imagenes INTEGER AUTO_INCREMENT KEY,id_shop INT, ruta VARCHARACTER(120), prioridad INT, FOREIGN KEY (id_shop) REFERENCES shop(id_shop));
+create table shop(id_shop INTEGER AUTO_INCREMENT KEY, nombre VARCHARAcontestCTER(80), precio INT, descripcion VARCHARACTER(400), categoria VARCHARACTER(60));
+create table shop_imagenes(id_shop_imagenes INTEGER AUTO_INCREMENT KEY,id_shop INT, ruta VARCHARACTER(200), prioridad INT, FOREIGN KEY (id_shop) REFERENCES shop(id_shop));
 create table valoracion(id_valoracion INTEGER AUTO_INCREMENT KEY, id_shop INT, estrellas INT, valoracion VARCHARACTER(500), nombre VARCHARACTER(80), FOREIGN KEY (id_shop) REFERENCES shop(id_shop));
 create table shop_ordenes(id_orden INTEGER AUTO_INCREMENT KEY, transaccion VARCHARACTER(60), precio INTEGER, contacto VARCHAR(600));
 create table shop_ordenes_producto(id_orden_producto INTEGER AUTO_INCREMENT KEY, id_shop INTEGER, cantidad INTEGER, FOREIGN KEY (id_shop) REFERENCES shop(id_shop))
+
