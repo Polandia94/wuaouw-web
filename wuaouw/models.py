@@ -50,9 +50,15 @@ class Valoracion(models.Model):
 
 
 class Ordenes(models.Model):
-    id_orden = models.AutoField(db_column='id_valoracion', primary_key=True)
-    transaccion = models.CharField(db_column='transaccion', max_length=600)
-    contacto = models.CharField(db_column='contacto', max_length=60)
+    id_orden = models.AutoField(db_column='id_orden', primary_key=True)
+    transaccion = models.CharField(db_column='transaccion', max_length=60)
+    direccion = models.CharField(db_column='direccion', max_length=300)
+    telefono = models.CharField(db_column='telefono', max_length=25)
+    email = models.CharField(db_column='email', max_length=50)
+    nombre = models.CharField(db_column='nombre', max_length=50)
+    apellido = models.CharField(db_column='apellido', max_length=50)
+    pais = models.CharField(db_column='pais', max_length=50)
+    provincia = models.CharField(db_column='provincia', max_length=50)
     precio = models.IntegerField(db_column='precio')
     
     class Meta:
@@ -66,7 +72,8 @@ class Ordenes(models.Model):
 
 class OrdenesProducto(models.Model):
     id_orden_producto = models.AutoField(db_column='id_orden_producto', primary_key=True)
-    id_shop = models.ForeignKey( 'shop', models.DO_NOTHING, db_column='id_shop')
+    id_shop = models.IntegerField( 'shop')
+    id_orden = models.IntegerField( 'shop_ordenes')
     cantidad = models.IntegerField(db_column='cantidad')
     
     class Meta:

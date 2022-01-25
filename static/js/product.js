@@ -21,3 +21,12 @@ sizeBtns.forEach((item, i) => { // looping through each button
         checkedBtn = i; // upading the variable
     })
 })
+
+$(document).on("click", "button[id^=btnComprar]", function (event) {
+    var id_shop = $(this).data('id_shop');
+    var oldItems = JSON.parse(localStorage.getItem('carrito')) || [];
+    var newItem = id_shop
+    oldItems.push(newItem);
+    localStorage.setItem('carrito', JSON.stringify(oldItems));
+    calcularCarrito()
+})

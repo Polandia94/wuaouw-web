@@ -19,5 +19,43 @@
     </tr>
     {% endfor %}
 </table>
+
+costo de envio
+<input readonly id="envio" type="number" value={{costoDeEnvio}}/>
+
+
+total = <input readonly id="monto" type="number" value="{{total}}"/> LUAs
+
+
+
+
+Ingrese la dirección de entrega
+<input type="text" id="Direccion" maxlength="300"></input>
+Pais: 
+<input type="text" id="Pais" maxlength="50"></input>
+Provincia:
+<input type="text" id="Provincia" maxlength="50"></input>
+Telefono:
+<input type="text" id="Telefono" maxlength="25"></input>
+Email:
+<input type="text" id="Email" maxlength="50"></input>
+Nombre:
+<input type="text" id="Nombre" maxlength="50"></input>
+Apellido:
+<input type="text" id="Apellido" maxlength="50"></input>
+
+<button id=comprar>Comprar</button>
+{% endblock %}
+{% block funciones %}
+<script>
+getCostoDeEnvio().then(result => {
+    let precio = result;
+    console.log(document.getElementById("monto").value)
+    document.getElementById("envio").value = precio
+    document.getElementById("monto").value = parseFloat(document.getElementById("monto").value)  + precio
+    console.log(document.getElementById("monto").value)
+
+})
+</script>
 {% endblock %}
 

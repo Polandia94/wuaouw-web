@@ -17,6 +17,10 @@ def vistaInicial(request):
 def imagenbase(request):
     return JsonResponse(imagenbasejson.json)
 
+def token(request):
+    context = {"tokenIsActive":"active"}
+    return render(request,'token.html', context)
+
 def shop(request):
     context = {"shopIsActive":"active"}
     data = []
@@ -42,32 +46,37 @@ def future(request):
     return render(request,'future.html', context)
 
 def vacancies(request):
-    
-    context = {}
+    context = {"vacanciesIsActive": "active"}
     return render(request,'vacancies.html', context)
 
 
 def cart(request):
-    productos = {}
-    carrito = request.GET.get("carrito")
-    carrito = carrito.split(",")
-    for element in carrito:
-        if element not in productos:
-            productos[element] = 1
-        else:
-            productos[element] = productos[element] +1
-    context = {'listado' : []}
-
-    for element in productos:
-        producto = Shop.objects.get(id_shop=int(element))
-        imagen = ShopImagenes.objects.filter(id_shop=producto).order_by("prioridad").first()
-        if imagen is not None:
-            ruta = imagen.ruta
-        else:
-            ruta = ""
-        context['listado'].append({"nombre" :producto.nombre, "cantidad": productos[element], "imagen":ruta,"precio": producto.precio/100, "subtotal": (producto.precio/100)*productos[element]})
-    print(context)
-    return render(request,'cart.html', context)
+    try:
+        productos = {}
+        carrito = request.GET.get("carrito")
+        carrito = carrito.split(",")
+        for element in carrito:
+            if element not in productos:
+                productos[element] = 1
+            else:
+                productos[element] = productos[element] +1
+        context = {'listado' : []}
+        total = 0
+        for element in productos:
+            producto = Shop.objects.get(id_shop=int(element))
+            imagen = ShopImagenes.objects.filter(id_shop=producto).order_by("prioridad").first()
+            if imagen is not None:
+                ruta = imagen.ruta
+            else:
+                ruta = ""
+            total = total + (producto.precio/100)*productos[element]
+            context['listado'].append({"nombre" :producto.nombre, "cantidad": productos[element], "imagen":ruta,"precio": producto.precio/100, "subtotal": (producto.precio/100)*productos[element]})
+        context["total"]= total
+        print(context)
+        return render(request,'cart.html', context)
+    except Exception as e:
+        print(e)
+        return redirect("/")
 
 def product(request):
     id = request.GET.get('id')
@@ -77,7 +86,7 @@ def product(request):
     imagenes = []
     for i in ShopImagenes.objects.filter(id_shop=id).order_by("prioridad"):
         imagenes.append(i.ruta)
-    context = {"producto":producto, "imagenes":imagenes}
+    context = {"producto":producto, "imagenes":imagenes, "id_shop":id}
     print(context)
     return render(request,'product.html', context)
 
@@ -125,3 +134,31 @@ def search(request):
         context["error"] = "La Busqueda No arrojó Resultados"
 
     return render(request,'shop.html', context)
+
+def confirmarCompra(request):
+    print(request.POST)
+    productos = {}
+    carrito = request.POST.get("productos")
+    if carrito == None:
+        carrito = request.POST.get("productos[]")
+    value = request.POST.get("value")
+    carrito = carrito.split(",")
+    for element in carrito:
+        if element not in productos:
+            productos[element] = 1
+        else:
+
+            productos[element] = productos[element] +1
+    total = 0
+    for element in productos:
+        producto = Shop.objects.get(id_shop=int(element))
+        total = total + (producto.precio/100)*productos[element]
+    if total < float(value)/(10**18):
+        orden = Ordenes(transaccion=request.POST.get("tx"), precio=int(float(value)/(10**16)), direccion=request.POST.get("direccion"), pais=request.POST.get("pais"), provincia=request.POST.get("provincia"), telefono=request.POST.get("telefono"), email=request.POST.get("email"),nombre = request.POST.get("nombre"), apellido=request.POST.get("apellido"))
+        orden.save()
+        for element in productos:
+            ordenesProducto = OrdenesProducto(id_orden=orden.id_orden, id_shop=int(element), cantidad=productos[element])
+            ordenesProducto.save()
+        return JsonResponse({"result": "Compra Correcta", "correcto": "ok"})
+    else:
+        return JsonResponse({"result": "Monto Incorrecto", "correcto": "mal"})
