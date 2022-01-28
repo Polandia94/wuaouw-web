@@ -1,0 +1,59 @@
+.float-bottom{
+    position: absolute;
+    bottom: -30%;
+    left: 26%;
+    z-index:2
+}
+
+.botones-sociales{
+    position: absolute;
+    bottom: -34%;
+    z-index:2;
+}
+
+.fondo{
+    width: 100%;
+    height: auto;
+}
+
+.parachute{
+    width: 30%;
+    height: auto;
+    left:50%;
+}
+
+.avatar{
+    position: absolute;
+    left: 10%;
+    top:10%;
+    width: 20%;
+    height: auto;
+}
+
+.nombreapp{
+    position: absolute;
+    left: 32%;
+    width: 20%;
+    height: auto;
+}
+.fondoavatar{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.android{
+    position: absolute;
+    left: 33%;
+    width: 10%;
+    height: auto;
+    top:25%;
+}
+
+.ios{
+    position: absolute;
+    left: 46%;
+    width: 10%;
+    height: auto;
+    top:25%;
+}

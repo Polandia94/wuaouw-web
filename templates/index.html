@@ -1,8 +1,35 @@
 {% extends "root.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}">
+{% endblock %}
 
 {% block body %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js" type="text/javascript"></script>
-<div id='anim_container'></div>
+<img id="titulo1" class="float-bottom" src="{% static 'image/titulo1.png'%}"></img>
+<a class="botones-sociales" href="https://instagram.com/wuaow_mobile_game" style="left:40%;"><img  src="{% static 'image/instagram-7.png'%}" style="height: 50px;width: 50px;"></img></a>
+<a class="botones-sociales" href="https://discord.gg/3WaCNJ3gAR" style="left:44%;"><img  src="{% static 'image/discord1.png'%}" style="height: 50px;width: 50px;"></img></a>
+<a class="botones-sociales" href="https://t.me/joinchat/tmfmWbpCLKE2MjZk" style="left:48%;"><img  src="{% static 'image/telegram.png'%}" style="height: 50px;width: 50px;"></img></a>
+<a class="botones-sociales" href="https://twitter.com/WuaowC" style="left:52%;"><img  src="{% static 'image/twitter1.png'%}" style="height: 50px;width: 50px;"></img></a>
+<a class="botones-sociales" href="https://www.facebook.com/Wuaow-104225872016111" style="left:56%;"><img  src="{% static 'image/facebook-1.png'%}" style="height: 50px;width: 50px;"></img></a>
+<a class="botones-sociales" href="https://www.linkedin.com/in/wuaow/" style="left:60%;"><img  src="{% static 'image/linkedin1.png'%}" style="height: 50px;width: 50px;"></img></a>
+<div id='anim_container' styel="z-index:1"></div>
+<div><img class="fondo" src="{% static 'image/render-one.png'%}"></img></div>
+<div><img class="fondo" src="{% static 'image/render-two.jpg'%}"></img></div>
+<div><img class="fondo" src="{% static 'image/top-video-scaled.jpg'%}"></img></div>
+<div><img class="parachute" src="{% static 'image/parachute-guy-1024x1024.png'%}"></img></div>
+<div style="position: relative;">
+    <img class="fondoavatar" src="{% static 'image/Diseño-sin-título-1.png'%}"></img>
+    <img class="avatar" src="{% static 'image/dolltrim.png'%}"></img>
+    <div class="nombreapp" style="top: 12%;">WUAOW</div>
+    <div class="nombreapp" style="top: 16%;">SUPPORTED OS</div>
+    <div class="nombreapp" style="top: 20%;">IOS & Android</div>
+    <img class="android" src="{% static 'image/gooplay-button-300x87.jpg'%}"></img>
+    <img class="ios" src="{% static 'image/applcoming-soon-300x87.jpg'%}"></img>
+
+</div>
+
 <script>
     var container = document.getElementById('anim_container');
       // Set up our animation 
