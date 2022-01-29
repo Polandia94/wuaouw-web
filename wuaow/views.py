@@ -6,7 +6,7 @@ from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
 from django.views.generic import CreateView, ListView, UpdateView, View
 from django.http import JsonResponse
 from .elements import imagenbasejson
-from wuaouw.models import *
+from wuaow.models import *
 from django.db.models import Q
 
 

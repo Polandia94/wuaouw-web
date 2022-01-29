@@ -1,5 +1,5 @@
 """
-WSGI config for wuaouw project.
+WSGI config for wuaow project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -16,6 +16,6 @@ path_home = str(Path(__file__).parents[1])
 if path_home not in sys.path:
     sys.path.append(path_home)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wuaouw.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'wuaow.settings')
 
 application = get_wsgi_application()

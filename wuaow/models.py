@@ -9,7 +9,7 @@ class Shop(models.Model):
     categoria = models.CharField(db_column='categoria', max_length=60)
     
     class Meta:
-        app_label  = 'wuaouw'
+        app_label  = 'wuaow'
         managed = True
         db_table = 'shop'  # Para que en la migracion no ponga el prefijo de la app
 
@@ -27,7 +27,7 @@ class ShopImagenes(models.Model):
     prioridad = models.IntegerField(db_column='prioridad')
     
     class Meta:
-        app_label  = 'wuaouw'
+        app_label  = 'wuaow'
         managed = True
         db_table = 'shop_imagenes'  # Para que en la migracion no ponga el prefijo de la app
 
@@ -41,7 +41,7 @@ class Valoracion(models.Model):
     estrellas = models.IntegerField(db_column='estrellas')
     
     class Meta:
-        app_label  = 'wuaouw'
+        app_label  = 'wuaow'
         managed = True
         db_table = 'valoracion'  # Para que en la migracion no ponga el prefijo de la app
 
@@ -62,7 +62,7 @@ class Ordenes(models.Model):
     precio = models.IntegerField(db_column='precio')
     
     class Meta:
-        app_label  = 'wuaouw'
+        app_label  = 'wuaow'
         managed = True
         db_table = 'shop_ordenes'  # Para que en la migracion no ponga el prefijo de la app
 
@@ -77,7 +77,7 @@ class OrdenesProducto(models.Model):
     cantidad = models.IntegerField(db_column='cantidad')
     
     class Meta:
-        app_label  = 'wuaouw'
+        app_label  = 'wuaow'
         managed = True
         db_table = 'shop_ordenes_producto'  # Para que en la migracion no ponga el prefijo de la app
 

@@ -1,7 +1,7 @@
 from . import views
 
 
-"""wuaouw URL Configuration
+"""wuaow URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
