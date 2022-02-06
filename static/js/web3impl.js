@@ -1,4 +1,5 @@
-const provider = new ethers.providers.Web3Provider(window.ethereum)
+let provider = new ethers.providers.Web3Provider(window.ethereum)
+let sesionCerrada = true;
 const addressTesoro = "0x3E5554703D8bEf62058B0FCcA05AEDA2582Bc504"
 const addressLua = "0xBb99F67E3ec3c3e0CB15e5C838867a37E3D87EB1"
 const addressPancakePair = "0x005000d85bA7C2E7842ab6f319676476885890C9"
@@ -309,11 +310,27 @@ function getCookie(name) {
     return cookieValue;
 }
 async function iniciarSesion(){
-    await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
-    address = await signer.getAddress()
-    login.innerHTML = address.substring(0,8) + "..."
-    return await signer
+	if(login.innerHTML == 'Login'){
+		
+		await provider.send("eth_requestAccounts", []);
+		const signer = provider.getSigner();
+		
+		
+		address = await signer.getAddress()
+		let resultado = await signer
+		
+		if(sesionCerrada){
+			signature = await signer.signMessage("login");
+		}
+		login.innerHTML = address.substring(0,8) + "..."
+		sesionCerrada = false;
+		return resultado}
+	else{
+		if(window.confirm("Desea Cerrar sesión?")){
+			login.innerHTML = 'Login'
+			sesionCerrada = true;
+		}
+	}
 }
 
 async function realizarPago(direccion, monto){
@@ -328,6 +345,7 @@ async function realizarPago(direccion, monto){
 }
 
 async function firmar(texto){
+	console.log(signer)
     if(typeof signer == 'undefined'){
         signer = await iniciarSesion()
     }
